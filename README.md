@@ -17,16 +17,6 @@ If you're on macOS or Linux, you can install Muxie using [Homebrew](https://brew
 brew install phanorcoll/muxie
 ```
 
-### Using Go
-
-If you have a Go environment set up, you can install Muxie directly from the source:
-
-```bash
-go install github.com/phanorcoll/muxie/cmd/muxie@latest
-```
-
-This will download the source code, compile it, and place the `muxie` binary in your Go bin directory (`$GOPATH/bin` or `$HOME/go/bin`).
-
 ### Manual Installation
 
 1.  Head over to the [releases page](https://github.com/phanorcoll/muxie/releases).
