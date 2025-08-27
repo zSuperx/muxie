@@ -1,0 +1,33 @@
+name: Create Release Tag
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install go-semantic-release
+        run: npm install -g go-semantic-release
+
+      - name: Run semantic-release
+        run: go-semantic-release --allow-no-changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
