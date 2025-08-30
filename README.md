@@ -14,7 +14,7 @@ Getting Muxie up and running is a breeze.
 If you're on macOS or Linux, you can install Muxie using [Homebrew](https://brew.sh/).
 
 ```bash
-brew install phanorcoll/muxie
+brew install phanorcoll/homebrew-muxie/muxie
 ```
 
 ### Manual Installation
