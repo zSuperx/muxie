@@ -35,11 +35,12 @@ var (
 // isFromConfig: true if the session is defined in the config file.
 // isRunning: true if the session is currently running.
 type session struct {
-	sessionName   string
-	numWindows    int
-	activeSession string
-	isFromConfig  bool
-	isRunning     bool
+	sessionName     string
+	numWindows      int
+	activeSession   string
+	isFromConfig    bool
+	isRunning       bool
+	addSpacingUnder bool
 }
 
 func (i session) SessionName() string { return i.sessionName }
@@ -75,7 +76,14 @@ func (d sessionDelegate) Render(w io.Writer, m list.Model, index int, listItem l
 	if name == activesession {
 		name = activeSessionStyle.Render(name + " " + activeSessionHelpStyle("  󰞓 active"))
 	}
+
 	desc := fmt.Sprintf("-%d󱂬 - ", i.numWindows) + icon + name
+
+	// This just adds some separation between active/running sessions
+	// and the config sessions that have not been started yet
+	if i.addSpacingUnder {
+		desc += "\n"
+	}
 
 	fn := itemStyle.Render
 	if index == m.Index() {
