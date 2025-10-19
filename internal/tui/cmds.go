@@ -110,5 +110,20 @@ func moveActiveSessionToTop(sessions []list.Item, activeSession string) []list.I
 			others = append(others, s)
 		}
 	}
-	return append(append(active, running...), others...)
+
+
+	combined := append(append(active, running...), others...)
+
+	// Find the session that shows up right before the "others" and
+	// set it's addSpacingUnder property to true.
+	// This is then interpreted by the Render function to add a single
+	// line of white space underneath. This helps separate the active/running
+	// sessions from the unstarted config sessions.
+	if 0 < len(others) && len(others) < len(combined) {
+		sess := combined[len(combined) - len(others) - 1].(session)
+		sess.addSpacingUnder = true
+		combined[len(combined) - len(others) - 1] = sess
+	}
+
+	return combined
 }
